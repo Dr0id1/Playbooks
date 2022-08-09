@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.7
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--entrypoints.websecure.address=:443"
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - --certificatesresolvers.myresolver.acme.email=admin@wickedgroup.ca
+      - --certificatesresolvers.myresolver.acme.storage=/etc/traefik/acme.json
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+     #- "--providers.docker.exposedbydefault=false"
+
+    ports:
+      # The HTTPs port
+      - "443:443"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8484:8080"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      #- ~/Traefik/acme.json:/etc/traefik/acme.json
+      - ~/Traefik/certs:/etc/traefik/certs
+      # - traefik-ssl-certs:/ssl-certs
