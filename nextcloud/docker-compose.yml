@@ -7,10 +7,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Montreal
     volumes:
-      - /path/to/appdata:/config
-      - /path/to/data:/data
+      - /opt/nextcloud:/config
+      - /mnt/share:/data
     ports:
-      - 443:443
+      - 444:443
     restart: unless-stopped
