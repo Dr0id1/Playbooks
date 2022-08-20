@@ -1,14 +1,12 @@
 global:
   checkNewVersion: true
   sendAnonymousUsage: false  # true by default
-
 # (Optional) Log information
 # ---
  log:
   level: DEBUG  # DEBUG, INFO, WARNING, ERROR, CRITICAL
-   format: common  # common, json, logfmt
-   filePath: /var/log/traefik/traefik.log
-
+  format: common  # common, json, logfmt
+  filePath: /var/log/traefik/traefik.log
 # (Optional) Accesslog
 # ---
 # accesslog:
@@ -37,7 +35,7 @@ entryPoints:
   websecure:
     address: :443
 
- certificatesResolvers:
+certificatesResolvers:
 #   staging:
 #     acme:
 #       email: your-email@example.com
