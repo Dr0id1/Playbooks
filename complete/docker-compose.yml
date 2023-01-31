@@ -48,7 +48,7 @@ services:
       - LOG_LEVEL=${LOG_LEVEL:-info}
       - LOG_HTML=${LOG_HTML:-false}
       - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-hcaptcha-solver}
-      - TZ=Europe/London
+      - TZ=America/Montreal
     ports:
       - 8191:8191
     restart: unless-stopped
@@ -79,6 +79,6 @@ services:
       - /path/to/downloads:/downloads #configurer
     ports:
       - 8080:8080
-      - 6881:6881
-      - 6881:6881/udp
+      - 6881:6881 #configurer
+      - 6881:6881/udp #configurer
     restart: unless-stopped
