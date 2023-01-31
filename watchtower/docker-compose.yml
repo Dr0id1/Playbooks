@@ -1,6 +1,8 @@
 version: "3"
 services:
   watchtower:
+    environment:
+      TZ: "America/Montreal"
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
