@@ -1,8 +1,14 @@
-version: "3"
+version: '3'
 services:
   watchtower:
-    environment:
-      TZ: "America/Montreal"
     image: containrrr/watchtower
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - TZ=America/Montreal
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
