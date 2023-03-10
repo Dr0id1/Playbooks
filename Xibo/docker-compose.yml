@@ -1,15 +1,5 @@
 version: "2.1"
 services:
-    portainer:
-      image: portainer/portainer-ce:alpine
-      container_name: portainer
-      command: -H unix:///var/run/docker.sock
-      ports:
-        - "9000:9000"
-      volumes:
-        - "/var/run/docker.sock:/var/run/docker.sock"
-        - "portainer_data:/data"
-      restart: always
     cms-db:
         image: mysql:5.7
         volumes:
@@ -19,7 +9,7 @@ services:
             - MYSQL_USER=cms
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
         mem_limit: 1g
-        env_file: config.env
+        env_file: stack.env
         restart: always
     cms-xmr:
         image: xibosignage/xibo-xmr:0.9
@@ -27,7 +17,7 @@ services:
             - "9505:9505"
         restart: always
         mem_limit: 256m
-        env_file: config.env
+        env_file: stack.env
     cms-web:
         image: xibosignage/xibo-cms:release-3.3.3
         volumes:
@@ -45,7 +35,7 @@ services:
             - XMR_HOST=cms-xmr
             - CMS_USE_MEMCACHED=true
             - MEMCACHED_HOST=cms-memcached
-        env_file: config.env
+        env_file: stack.env
         ports:
             - "80:80"
         mem_limit: 1g
