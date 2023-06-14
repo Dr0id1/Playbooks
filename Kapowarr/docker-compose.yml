@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    kapowarr:
+        container_name: kapowarr
+        volumes:
+            - '/opt/kapowarr:/app/db'
+            - '/media/carbon/SeedBox:/app/temp_downloads'
+            - '/media/share/Comics:/content'
+        ports:
+            - '5656:5656'
+        image: 'mrcas/kapowarr:latest'

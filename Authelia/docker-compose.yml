@@ -1,0 +1,16 @@
+---
+version: "3.8"
+services:
+  authelia:
+    container_name: authelia
+    image: authelia/authelia
+    restart: unless-stopped
+    networks:
+      net:
+        aliases: []
+    expose:
+      - 9091
+    volumes:
+      - /opt/authelia/config:/config
+    environment:
+      TZ: 'America/Montreal'
