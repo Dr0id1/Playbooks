@@ -18,16 +18,21 @@ views:
             entity: device_tracker.oneplus_6t
             fill_container: false
       - type: horizontal-stack
+        title: Extérieur
         cards:
           - type: custom:mushroom-light-card
             entity: switch.arriere
           - type: custom:mushroom-light-card
             entity: switch.exterieur
-      - type: vertical-stack
+      - square: false
+        type: grid
+        columns: 2
+        title: Cusine
         cards:
           - type: custom:mushroom-light-card
             entity: light.comptoir_lavabo
             fill_container: false
+            show_color_control: false
           - type: custom:mushroom-light-card
             entity: light.comptoir_four
           - type: custom:mushroom-light-card
@@ -44,9 +49,11 @@ views:
         theme: Google Light and Dark Theme
         secondary_info_attribute: humidity
       - type: horizontal-stack
+        title: Salle de Bain
         cards:
           - type: custom:mushroom-light-card
             entity: light.salle_de_bain
+            name: Lumières
           - type: custom:mushroom-light-card
             entity: light.niche
             name: Niche
