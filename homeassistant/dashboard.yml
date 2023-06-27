@@ -1,0 +1,79 @@
+views:
+  - theme: Google Light and Dark Theme
+    title: Contrôles
+    icon: mdi:ceiling-light
+    type: custom:masonry-layout
+    layout:
+      width: 300
+      max_cols: 10
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-person-card
+            entity: device_tracker.s21_2
+            name: Maxime
+            icon: mdi:account
+          - type: custom:mushroom-person-card
+            entity: device_tracker.oneplus_6t
+            fill_container: false
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: switch.arriere
+          - type: custom:mushroom-light-card
+            entity: switch.exterieur
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.comptoir_lavabo
+            fill_container: false
+          - type: custom:mushroom-light-card
+            entity: light.comptoir_four
+          - type: custom:mushroom-light-card
+            entity: light.cuisine
+          - type: custom:mushroom-light-card
+            entity: light.salle_a_manger
+            name: Salle à Manger
+            layout: horizontal
+            show_brightness_control: true
+      - show_current: true
+        show_forecast: false
+        type: weather-forecast
+        entity: weather.home
+        theme: Google Light and Dark Theme
+        secondary_info_attribute: humidity
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.salle_de_bain
+          - type: custom:mushroom-light-card
+            entity: light.niche
+            name: Niche
+            layout: horizontal
+            show_brightness_control: true
+  - theme: Backend-selected
+    title: Autres
+    path: autres
+    icon: mdi:amplifier
+    badges: []
+    cards:
+      - type: custom:vacuum-card
+        entity: vacuum.therequin
+        image: default
+      - type: entities
+        entities:
+          - entity: sensor.esp_1_living_room_humidity
+            name: Living Room Humidity
+          - entity: sensor.esp_1_living_room_temperature
+            name: Living Room Temperature
+        title: ESP-1
+  - title: Chauffage
+    path: chauffage
+    icon: mdi:heat-wave
+    theme: Google Light and Dark Theme
+    badges: []
+    cards:
+      - type: thermostat
+        entity: climate.th1310wf_b4159c
+        theme: Google Light and Dark Theme
