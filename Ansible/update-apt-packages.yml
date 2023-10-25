@@ -1,9 +1,8 @@
 ---
 - hosts: all
-  beccome: true
+  become: true
   tasks:
     - name: update pat packages
       apt:
         upgrade: yes
         update_cache: yes
-        
