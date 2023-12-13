@@ -73,12 +73,12 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Montreal
-      - WEBUI_PORT=8080
+      - WEBUI_PORT=8080 #port webui
     volumes:
       - /opt/qbittorrent/config:/config
       - /path/to/downloads:/downloads #configurer
     ports:
-      - 8080:8080
-      - 6881:6881 #configurer
-      - 6881:6881/udp #configurer
+      - 8080:8080 # port webui
+      - 6881:6881 #configurer port tracker
+      - 6881:6881/udp #configurer port tracker
     restart: unless-stopped
