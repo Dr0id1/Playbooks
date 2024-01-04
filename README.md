@@ -29,13 +29,13 @@ Une fois déployé, rendez-vous à `http://iphost:9000`. Il vous sera ensuite de
 
 Une fois votre compte créer, vous obtiendré la page suivante:
 
-![alt text](wiki-content\images\portainer-get-started.png "Portainer - Get Started")
+![alt text](https://wickedgroup.ca/wiki-images/portainer-get-started.png "Portainer - Get Started")
 
 Cliquez ensuite sur "Get Started". Votre environnement local sera automatiquement ajouté.
 
 Rendez-vous à `Stacks`, c'est à cet endroit que vous pourrez déployer vos `docker-compose.yml`.
 
-![alt text](wiki-content\images\portainer-home-menu.png "Portainer - Get Started")
+![alt text](https://wickedgroup.ca/wiki-images/portainer-home-menu.png "Portainer - Get Started")
 
 Cette méthode vous permet d'éviter de faire tout en `CLI`. Vous pourrez y revenir facilement et mettre vos fichiers à jour sans difficulté.
 
