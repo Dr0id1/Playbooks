@@ -92,4 +92,23 @@ Rendez-vous à `Stacks`, c'est à cet endroit que vous pourrez déployer vos `do
 Cette méthode vous permet d'éviter de faire tout en `CLI`. Vous pourrez y revenir facilement et mettre vos fichiers à jour sans difficulté.
 
 ## CloudFlare DDNS
-Il nous est possible d'utiliser gratuitement le service de CloudFlare afin d'obteni
+Il nous est possible d'utiliser gratuitement le service de CloudFlare d'utiliser un domaine que vous possédez pour vos services externes.
+
+Tout d'abord il vous faudra votre propre domaine et pointer les nameservers vers ceux de CloudFlare. Ces étapes ne seront pas couvertes ici.
+
+Par la suite, il vous faudra générer un "Token" pour que le conteneur puisse s'authentifier à votre compte CloudFlare. De cette façon, le conteneur pourra mettre à jour régulièrement votre adresse IP publique.
+
+Nous mettrons également en place les paramètres nécessaire pour la mise en place d'un "Reverse-Proxy".
+
+### Configuration DNS
+Rendez-vous sur votre panneau CloudFlare, sélectionner le domaine concerné et activé les fonctions suivantes dans les options de sécuritées:
+
+![alt text](https://wickedgroup.ca/wiki-images/cloudflare-strict.png "CloudFlare - Strict")
+
+![alt text](https://wickedgroup.ca/wiki-images/cloudflare-always-https.png "CloudFlare - Always HTTPS")
+
+![alt text](https://wickedgroup.ca/wiki-images/cloudflare-https-rewrite.png "CloudFlare - HTTPS Rewrite")
+
+Il faut ensuite créer une règle comme celle-ci:
+
+![alt text](https://wickedgroup.ca/wiki-images/cloudflare-rules.png "CloudFlare - Rules")
