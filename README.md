@@ -1,6 +1,8 @@
 
 # MadMax's `Homelab`
 
+![alt text](https://wickedgroup.ca/wiki-images/MadMax-Github_Banner.png "MadMax's Banner")
+
 **Index**
 1. [Général](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#g%C3%A9n%C3%A9ral)
 2. [Portainer](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#portainer)
@@ -15,10 +17,10 @@ Il est fortement recommandé de débuter en utilisant un gestionnaire tel que `P
 
 Les conteneurs peuvent être déployés de 2 facons:
 
-* [Ligne de commande]()
-* [Docker-Compose]()
+* [Ligne de commande](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#ligne-de-commande)
+* [Docker-Compose](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#docker-compose)
 
-Nous allons utilisé le conteneurs qBittorent à titre d'exemple.
+Nous allons utilisé le conteneur `qBittorent` à titre d'exemple.
 
 ### Ligne de commande
 ```yaml
@@ -50,7 +52,7 @@ services:
       - TZ=America/Montreal
       - WEBUI_PORT=8080
     volumes:
-      - /path/to/appdata/config:/config
+      - /opt/qbittorrent/config:/config
       - /path/to/downloads:/downloads
     ports:
       - 8080:8080
