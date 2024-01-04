@@ -3,6 +3,8 @@
 
 ![alt text](https://wickedgroup.ca/wiki-images/MadMax-Github_Banner.png "MadMax's Banner")
 
+***Vous trouvez les étapes initiales afin de configurer un HomeLab similaire au mien. N'hésitez pas à adapter les configurations à vos besoins.Ceux-ci ne sont qu'à titres informatives***
+
 **Index**
 1. [Général](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#g%C3%A9n%C3%A9ral)
 2. [Portainer](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#portainer)
