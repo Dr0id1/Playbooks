@@ -6,7 +6,7 @@
 **Index**
 1. [Général](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#g%C3%A9n%C3%A9ral)
 2. [Portainer](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#portainer)
-2. [CloudFlare]()
+2. [CloudFlare](https://github.com/Dr0id1/Playbooks/tree/master?tab=readme-ov-file#cloudflare-ddns)
 
 # Docker
 ## Général
@@ -112,3 +112,52 @@ Rendez-vous sur votre panneau CloudFlare, sélectionner le domaine concerné et 
 Il faut ensuite créer une règle comme celle-ci:
 
 ![alt text](https://wickedgroup.ca/wiki-images/cloudflare-rules.png "CloudFlare - Rules")
+
+### Token
+Pour créer un jeton d'API CloudFlare pour votre zone DNS, suivez ces étapes sur https://dash.cloudflare.com/profile/api-tokens :
+
+1. Cliquez sur "Créer un jeton".
+2. Donnez un nom au jeton, par exemple, cloudflare-ddns.
+3. Accordez au jeton les autorisations suivantes :
+    * Zone - Paramètres de zone - Lecture
+    * Zone - Zone - Lecture
+    * Zone - DNS - Modifier
+    * Définissez les ressources de la zone comme suit :
+    * Inclure - Toutes les zones
+4. Terminez l'assistant et copiez le jeton généré dans la variable API_KEY pour le conteneur.
+
+### Conteneur
+
+Nous allons utilisé le conteneur [oznu/cloudflare-ddns](https://github.com/oznu/docker-cloudflare-ddns) pour mettre à jour notre IP.
+
+```shell
+sudo docker run \
+  -e API_KEY=TOKENCLOUDFLARE \
+  -e ZONE=example.com \
+  -e SUBDOMAIN=subdomain \ 
+  oznu/cloudflare-ddns
+```
+
+| Variables| Notes|
+| ------------- |:-------------:|
+| `API_KEY` | Clé Généré |
+| `ZONE` | La racine de votre domaine      |
+| `SUBDOMAIN` | Sous-Domaine (Facultatif)     |
+
+Si le déploiement du conteneur se déroule comme prévu, vous devriez obtenir les logs suivants (Accessible via Portainer):
+
+```accesslog
+[cont-init.d] executing container initialization scripts...
+[cont-init.d] 30-cloudflare-setup: executing... 
+DNS Zone: mondomaine.com (1725776d1644dc0b9e36fa046ebe7145)
+DNS Record: sousdomaine.mondomaine.com (7422e19ddcd60b711aaaaf52d77357a7)
+[cont-init.d] 30-cloudflare-setup: exited 0.
+[cont-init.d] 50-ddns: executing... 
+No DNS update required for sousdomaine.mondomaine.com (71.55.190.170).
+[cont-init.d] 50-ddns: exited 0.
+[cont-init.d] done.
+[services.d] starting services
+Starting crond...
+crond: crond (busybox 1.31.1) started, log level 6
+[services.d] done.
+```
