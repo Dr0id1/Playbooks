@@ -1,6 +1,9 @@
-# SoftUpdatePS V3.1
-# Script.ps1
-#
+# SoftUpdatePS V4.1
+Write-Host "SoftUpdatePS V4.1"
+
+# Skip Line
+write-host "`n"
+
 $ErrorActionPreference = 'silentlycontinue'
 $ProgressPreference = 'SilentlyContinue' 
 
