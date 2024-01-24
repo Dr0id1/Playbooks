@@ -47,10 +47,10 @@ Write-Host "Telechargement de RogueKiller64 ..."
 Invoke-WebRequest "https://download.adlice.com/api/?action=download&app=roguekiller&type=x64" -OutFile RogueKiller64.exe
 if($?)
 {
-    Write-Host "La nouvelle version de RogueKiller a ete telecharge" -f Green
+    Write-Host "La nouvelle version de RogueKiller64 a ete telecharge" -f Green
 }
 else {
-    Write-Host "Impossible de telecharger RogueKiller" -f Red
+    Write-Host "Impossible de telecharger RogueKiller64" -f Red
 }
 
 # Skip Line
@@ -70,10 +70,10 @@ Write-Host "Telechargement de RogueKiller32 ..."
 Invoke-WebRequest "https://download.adlice.com/api/?action=download&app=roguekiller&type=x86" -OutFile RogueKiller32.exe
 if($?)
 {
-    Write-Host "La nouvelle version de RogueKiller a ete telecharge" -f Green
+    Write-Host "La nouvelle version de RogueKiller32 a ete telecharge" -f Green
 }
 else {
-    Write-Host "Impossible de telecharger RogueKiller" -f Red
+    Write-Host "Impossible de telecharger RogueKiller32" -f Red
 }
 
 # Skip Line
@@ -102,9 +102,19 @@ else {
 write-host "`n"
 
 # Screensaver
+Write-Host "Desactivation du screensaver ..."
 powercfg -change -monitor-timeout-ac 0
 powercfg -x -standby-timeout-ac 0
+Write-Host "Complete !" -f Green
 
+# Skip Line
+write-host "`n"
 
-Write-Host -NoNewLine 'Press any key to quit...';
+#$confirmation = Read-Host "Est-ce qu'on planifie un check disk au prochain redemarrage ? (y/n)"
+#if ($confirmation -eq 'y') {
+    #Clear-Host
+    #Repair-Volume -DriveLetter C -SpotFix
+#}
+
+Write-Host -NoNewLine "Appuyer sur n'importe quel touche pour quitter...";
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
