@@ -1,9 +1,10 @@
 # SoftUpdatePS V4.1
-Write-Host "SoftUpdatePS V4.1"
+Write-Host "SoftUpdatePS V4.2"
 
 # Skip Line
 write-host "`n"
 
+# Set silent mode
 $ErrorActionPreference = 'silentlycontinue'
 $ProgressPreference = 'SilentlyContinue' 
 
@@ -113,11 +114,11 @@ Write-Host "Complete !" -f Green
 # Skip Line
 write-host "`n"
 
+Write-Host -NoNewLine "Appuyer sur n'importe quel touche pour quitter...";
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
+
 #$confirmation = Read-Host "Est-ce qu'on planifie un check disk au prochain redemarrage ? (y/n)"
 #if ($confirmation -eq 'y') {
     #Clear-Host
     #Repair-Volume -DriveLetter C -SpotFix
 #}
-
-Write-Host -NoNewLine "Appuyer sur n'importe quel touche pour quitter...";
-$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
