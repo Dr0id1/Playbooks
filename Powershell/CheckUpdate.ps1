@@ -21,7 +21,3 @@ TelechargerEtMettreAJourScript $nomScriptUpdate $lienNouvelleVersionUpdate
 
 # Téléchargez et mettez à jour le deuxième script
 TelechargerEtMettreAJourScript $nomScriptPersonnalisation $lienNouvelleVersionPersonnalisation
-
-# Done
-Write-Host -NoNewLine "Appuyer sur n'importe quel touche pour quitter...";
-$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');

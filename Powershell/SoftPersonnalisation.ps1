@@ -1,5 +1,5 @@
-# SoftPersonnalisation V1.2
-Write-Host "SoftPersonnalisation V1.2"
+# SoftPersonnalisation V1.3
+Write-Host "SoftPersonnalisation V1.3"
 
 # Skip Line
 write-host "`n"
@@ -11,7 +11,7 @@ $ErrorActionPreference = 'silentlycontinue'
 # Check for elevated privileges and restart the script with elevated privileges if not already elevated
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Host "Ce script doit etre executer en tant qu'administrateur. Redemarrage en cours ..."
-    Start-Sleep -Seconds 3
+    Start-Sleep -Seconds 2
     Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     Exit
 }
@@ -27,6 +27,9 @@ Write-Host "Copie du wallpaper sur le systeme..."
 Copy-Item "$PSScriptRoot\wallpaper1.bmp" "$env:USERPROFILE\pictures\wallpaper1.bmp" -Force
 Write-Host "Done." -f Green
 
+# Skip Line
+write-host "`n"
+
 # Spécifiez le chemin complet de l'image que vous souhaitez utiliser comme fond d'écran
 $ImagePath = "$env:USERPROFILE\pictures\wallpaper1.bmp"
 
@@ -35,10 +38,10 @@ Write-Host "Definir wallpaper sur Ecran 1..."
 $WallpaperType = 1
 Write-Host "Done." -f Green
 
+# Skip Line
+write-host "`n"
+
 # Utiliser la commande SystemParametersInfo pour changer le fond d'écran
-# 20 est le code pour SPI_SETDESKWALLPAPER
-# Le dernier paramètre de la commande spécifie le type de fond d'écran
-# Notez que cela peut nécessiter des privilèges élevés (exécutez PowerShell en tant qu'administrateur)
 Add-Type -TypeDefinition @"
     using System;
     using System.Runtime.InteropServices;
@@ -58,10 +61,11 @@ write-host "`n"
 
 # Personalization
 Write-Host "Ajout des informations OEM..."
+Copy-Item "$PSScriptRoot\OEMlogo.bmp" "$env:USERPROFILE\pictures\OEMlogo.bmp" -Force
 $regKeyPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation'
 $regKeyValues = @{
     'Manufacturer' = 'PC Supreme Inc.'
-    'Logo' = "$env:USERPROFILE\Local Settings\Application Data\Microsoft\OEMlogo.bmp"
+    'Logo' = "$env:USERPROFILE\pictures\OEMlogo.bmp"
     'SupportPhone' = '514-644-1331 // 1-877-301-4809'
     'SupportHours' = 'Lundi au mercredi : 9h30-17h30. Jeudi et Vendredi : 9h30-21h'
 }
@@ -72,6 +76,9 @@ foreach ($entry in $regKeyValues.GetEnumerator()) {
 }
 Write-Host "Done." -f Green
 
+# Skip Line
+write-host "`n"
+
 # Wait for the desktop to finish refreshing
 Start-Sleep -Seconds 2
 
@@ -79,18 +86,23 @@ Start-Sleep -Seconds 2
 write-host "`n"
 
 # Display program choices
-Write-Host "Selectionnez les programmes a installer (tapez 'all' pour tous les programmes) :"
-Write-Host "1. VLC"
-Write-Host "2. Adobe Reader"
-Write-Host "3. OpenOffice"
-Write-Host "4. 7zip"
-Write-Host "5. Zoom"
+Write-Host "Selectionnez les programmes a installer (tapez 'all' pour tous les programmes) :" -f Yellow
+write-host "`n"
+Write-Host "1. VLC" -f Yellow
+Write-Host "2. Adobe Reader" -f Yellow
+Write-Host "3. OpenOffice" -f Yellow
+Write-Host "4. 7zip" -f Yellow
+Write-Host "5. Zoom" -f Yellow
+write-host "`n"
+Write-Host "6. ** Tout desinstaller **" -f Yellow
 
 # Skip Line
 write-host "`n"
 
 # Prompt user to enter program numbers separated by commas or 'all'
-$choices = Read-Host "Entrez les numeros des programmes que vous souhaitez installer (separes par des virgules) ou tapez 'all' pour tous les programmes."
+write-host "Entrez les numeros des programmes que vous souhaitez installer (separes par des virgules) ou tapez 'all' pour tous les programmes." -f Yellow
+write-host "`n"
+$choices = Read-Host "Choix: "
 
 # Convert the input into an array of choices
 $choicesArray = $choices -split ',' | ForEach-Object { $_.Trim() }
@@ -106,7 +118,8 @@ foreach ($choice in $choicesArray) {
         2 { choco install adobereader -y }
         3 { choco install openoffice -y }
         4 { choco install 7zip -y }
-        4 { choco install zoom -y }
+        5 { choco install zoom -y }
+        6 { choco uninstall all -y }
         default { Write-Host "Choix invalide: $choice. Skipping." }
     }
 }

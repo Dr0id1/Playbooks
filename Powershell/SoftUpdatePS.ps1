@@ -116,9 +116,3 @@ write-host "`n"
 
 Write-Host -NoNewLine "Appuyer sur n'importe quel touche pour quitter...";
 $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
-
-#$confirmation = Read-Host "Est-ce qu'on planifie un check disk au prochain redemarrage ? (y/n)"
-#if ($confirmation -eq 'y') {
-    #Clear-Host
-    #Repair-Volume -DriveLetter C -SpotFix
-#}
