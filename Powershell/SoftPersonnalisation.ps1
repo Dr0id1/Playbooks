@@ -1,5 +1,5 @@
-# SoftPersonnalisation V1.0
-Write-Host "SoftPersonnalisation V1.0"
+# SoftPersonnalisation V1.2
+Write-Host "SoftPersonnalisation V1.2"
 
 # Skip Line
 write-host "`n"
