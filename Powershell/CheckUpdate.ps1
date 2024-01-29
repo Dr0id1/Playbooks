@@ -10,6 +10,7 @@ function TelechargerEtMettreAJourScript($nomScript, $lienNouvelleVersion) {
     if ((Invoke-WebRequest -Uri $lienNouvelleVersion).Content -ne (Get-Content -Path $nomScript)) {
         Invoke-WebRequest -Uri $lienNouvelleVersion -OutFile $nomScript
         Write-Host "Nouvelle version de $nomScript telechargee avec succes."
+        write-host "`n"
     } else {
         Write-Host "Aucune nouvelle version de $nomScript disponible."
     }

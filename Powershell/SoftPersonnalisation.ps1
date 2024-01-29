@@ -5,8 +5,8 @@ Write-Host "SoftPersonnalisation V1.2"
 write-host "`n"
 
 # Set silent mode
-$ErrorActionPreference = 'silentlycontinue'
-$ProgressPreference = 'SilentlyContinue' 
+#$ErrorActionPreference = 'silentlycontinue'
+#$ProgressPreference = 'SilentlyContinue' 
 
 # Check for elevated privileges and restart the script with elevated privileges if not already elevated
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -78,13 +78,6 @@ write-host "`n"
 write-host "`n"
 
 # Personalization
-Write-Host "Ajout des informations de PC Suprême dans Info Systeme..."
-Copy-Item "$PWD\OEMlogo.bmp" "$env:LOCALAPPDATA\Microsoft\OEMlogo.bmp" -Force
-Copy-Item "$PWD\oeminfo_win10.reg" "$env:LOCALAPPDATA\Microsoft\oeminfo_win10.reg" -Force
-Start-Process regedit.exe -ArgumentList "/s $env:LOCALAPPDATA\Microsoft\oeminfo_win10.reg" -Wait
-Remove-Item "$env:LOCALAPPDATA\Microsoft\oeminfo_win10.reg" -Force
-
-# Modify additional registry key
 $regKeyPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation'
 $regKeyValues = @{
     'Manufacturer' = 'PC Supreme Inc.'
