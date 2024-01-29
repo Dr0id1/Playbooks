@@ -10,7 +10,7 @@ $ProgressPreference = 'SilentlyContinue'
 
 # Check for elevated privileges and restart the script with elevated privileges if not already elevated
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "Ce script doit être executer en tant qu'administrateur. Redemarrage en cours ..."
+    Write-Host "Ce script doit etre executer en tant qu'administrateur. Redemarrage en cours ..."
     Start-Sleep -Seconds 3
     Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
     Exit
@@ -23,33 +23,56 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 Clear-Host
 
 # Copy wallpaper1.bmp to user's pictures folder
-Write-Host "Copie du wallpaper sur le système..."
-Copy-Item "$PWD\wallpaper1.bmp" "$env:USERPROFILE\pictures\wallpaper1.bmp" -Force
+Write-Host "Copie du wallpaper sur le systeme..."
+Copy-Item "wallpaper1.bmp" "$env:USERPROFILE\pictures\wallpaper1.bmp" -Force
 Write-Host "Done." -f Green
+
+# Spécifiez le chemin complet de l'image que vous souhaitez utiliser comme fond d'écran
+$ImagePath = "$env:USERPROFILE\pictures\wallpaper1.bmp"
+
+# Définir le type du fond d'écran (1 pour l'écran principal, 2 pour l'écran secondaire)
+$WallpaperType = 1
+
+# Utiliser la commande SystemParametersInfo pour changer le fond d'écran
+# 20 est le code pour SPI_SETDESKWALLPAPER
+# Le dernier paramètre de la commande spécifie le type de fond d'écran
+# Notez que cela peut nécessiter des privilèges élevés (exécutez PowerShell en tant qu'administrateur)
+Add-Type -TypeDefinition @"
+    using System;
+    using System.Runtime.InteropServices;
+    public class Wallpaper {
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+    }
+"@
+
+# Appliquer le fond d'écran
+[Wallpaper]::SystemParametersInfo(20, 0, $ImagePath, $WallpaperType)
+
 
 # Skip Line
 write-host "`n"
 
 # Set wallpaper path in registry
-Write-Host "Modification du wallpaper dans le registre..."
-Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name Wallpaper -Value "$env:USERPROFILE\pictures\wallpaper1.bmp"
-Write-Host "Done." -f Green
+#Write-Host "Modification du wallpaper dans le registre..."
+#Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name Wallpaper -Value "$env:USERPROFILE\pictures\wallpaper1.bmp"
+#Write-Host "Done." -f Green
 
 # Skip Line
 write-host "`n"
 
 # Set wallpaper style in registry
-Write-Host "Modification du style du wallpaper dans le registre..."
-Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name WallpaperStyle -Value 2
-Write-Host "Done." -f Green
+#Write-Host "Modification du style du wallpaper dans le registre..."
+#Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name WallpaperStyle -Value 2
+#Write-Host "Done." -f Green
 
 # Skip Line
 write-host "`n"
 
 # Set tile wallpaper option in registry
-Write-Host "Modification de l'option wallpaper dans le registre..."
-Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name TileWallpaper -Value 0
-Write-Host "Done." -f Green
+#Write-Host "Modification de l'option wallpaper dans le registre..."
+#Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name TileWallpaper -Value 0
+#Write-Host "Done." -f Green
 
 # Skip Line
 write-host "`n"
@@ -91,7 +114,7 @@ Start-Sleep -Seconds 2
 write-host "`n"
 
 # Display program choices
-Write-Host "Sélectionnez les programmes à installer (tapez 'all' pour tous les programmes) :"
+Write-Host "Selectionnez les programmes a installer (tapez 'all' pour tous les programmes) :"
 Write-Host "1. VLC"
 Write-Host "2. Adobe Reader"
 Write-Host "3. OpenOffice"
@@ -99,7 +122,7 @@ Write-Host "4. 7zip"
 Write-Host "5. Zoom"
 
 # Prompt user to enter program numbers separated by commas or 'all'
-$choices = Read-Host "Entrez les numéros des programmes que vous souhaitez installer (séparés par des virgules) ou tapez 'all' pour tous les programmes."
+$choices = Read-Host "Entrez les numeros des programmes que vous souhaitez installer (separes par des virgules) ou tapez 'all' pour tous les programmes."
 
 # Convert the input into an array of choices
 $choicesArray = $choices -split ',' | ForEach-Object { $_.Trim() }

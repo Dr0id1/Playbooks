@@ -9,7 +9,7 @@ $lienNouvelleVersionPersonnalisation = "https://raw.githubusercontent.com/Dr0id1
 function TelechargerEtMettreAJourScript($nomScript, $lienNouvelleVersion) {
     if ((Invoke-WebRequest -Uri $lienNouvelleVersion).Content -ne (Get-Content -Path $nomScript)) {
         Invoke-WebRequest -Uri $lienNouvelleVersion -OutFile $nomScript
-        Write-Host "Nouvelle version de $nomScript téléchargée avec succès."
+        Write-Host "Nouvelle version de $nomScript telechargee avec succes."
     } else {
         Write-Host "Aucune nouvelle version de $nomScript disponible."
     }
@@ -20,3 +20,7 @@ TelechargerEtMettreAJourScript $nomScriptUpdate $lienNouvelleVersionUpdate
 
 # Téléchargez et mettez à jour le deuxième script
 TelechargerEtMettreAJourScript $nomScriptPersonnalisation $lienNouvelleVersionPersonnalisation
+
+# Done
+Write-Host -NoNewLine "Appuyer sur n'importe quel touche pour quitter...";
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
