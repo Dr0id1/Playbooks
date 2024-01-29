@@ -5,7 +5,7 @@ Write-Host "SoftPersonnalisation V1.2"
 write-host "`n"
 
 # Set silent mode
-#$ErrorActionPreference = 'silentlycontinue'
+$ErrorActionPreference = 'silentlycontinue'
 #$ProgressPreference = 'SilentlyContinue' 
 
 # Check for elevated privileges and restart the script with elevated privileges if not already elevated
@@ -24,7 +24,7 @@ Clear-Host
 
 # Copy wallpaper1.bmp to user's pictures folder
 Write-Host "Copie du wallpaper sur le systeme..."
-Copy-Item "wallpaper1.bmp" "$env:USERPROFILE\pictures\wallpaper1.bmp" -Force
+Copy-Item "$PSScriptRoot\wallpaper1.bmp" "$env:USERPROFILE\pictures\wallpaper1.bmp" -Force
 Write-Host "Done." -f Green
 
 # Spécifiez le chemin complet de l'image que vous souhaitez utiliser comme fond d'écran
@@ -53,30 +53,6 @@ Add-Type -TypeDefinition @"
 # Skip Line
 write-host "`n"
 
-# Set wallpaper path in registry
-#Write-Host "Modification du wallpaper dans le registre..."
-#Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name Wallpaper -Value "$env:USERPROFILE\pictures\wallpaper1.bmp"
-#Write-Host "Done." -f Green
-
-# Skip Line
-write-host "`n"
-
-# Set wallpaper style in registry
-#Write-Host "Modification du style du wallpaper dans le registre..."
-#Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name WallpaperStyle -Value 2
-#Write-Host "Done." -f Green
-
-# Skip Line
-write-host "`n"
-
-# Set tile wallpaper option in registry
-#Write-Host "Modification de l'option wallpaper dans le registre..."
-#Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name TileWallpaper -Value 0
-#Write-Host "Done." -f Green
-
-# Skip Line
-write-host "`n"
-
 # Personalization
 $regKeyPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation'
 $regKeyValues = @{
@@ -90,14 +66,6 @@ New-Item -Path $regKeyPath -Force
 foreach ($entry in $regKeyValues.GetEnumerator()) {
     Set-ItemProperty -Path $regKeyPath -Name $entry.Key -Value $entry.Value
 }
-Write-Host "Done." -f Green
-
-# Skip Line
-write-host "`n"
-
-# Refresh the desktop
-Write-Host "Rafraichissement du bureau..."
-[Microsoft.Win32.SystemEvents]::UserPreferenceChanged.Invoke($null, [Microsoft.Win32.UserPreferenceChangedEventArgs]::Desktop)
 Write-Host "Done." -f Green
 
 # Wait for the desktop to finish refreshing
