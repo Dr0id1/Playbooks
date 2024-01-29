@@ -31,7 +31,9 @@ Write-Host "Done." -f Green
 $ImagePath = "$env:USERPROFILE\pictures\wallpaper1.bmp"
 
 # Définir le type du fond d'écran (1 pour l'écran principal, 2 pour l'écran secondaire)
+Write-Host "Definir wallpaper sur Ecran 1..."
 $WallpaperType = 1
+Write-Host "Done." -f Green
 
 # Utiliser la commande SystemParametersInfo pour changer le fond d'écran
 # 20 est le code pour SPI_SETDESKWALLPAPER
@@ -47,13 +49,15 @@ Add-Type -TypeDefinition @"
 "@
 
 # Appliquer le fond d'écran
+Write-Host "Application du wallpaper..."
 [Wallpaper]::SystemParametersInfo(20, 0, $ImagePath, $WallpaperType)
-
+Write-Host "Done." -f Green
 
 # Skip Line
 write-host "`n"
 
 # Personalization
+Write-Host "Ajout des informations OEM..."
 $regKeyPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation'
 $regKeyValues = @{
     'Manufacturer' = 'PC Supreme Inc.'
@@ -81,6 +85,9 @@ Write-Host "2. Adobe Reader"
 Write-Host "3. OpenOffice"
 Write-Host "4. 7zip"
 Write-Host "5. Zoom"
+
+# Skip Line
+write-host "`n"
 
 # Prompt user to enter program numbers separated by commas or 'all'
 $choices = Read-Host "Entrez les numeros des programmes que vous souhaitez installer (separes par des virgules) ou tapez 'all' pour tous les programmes."
