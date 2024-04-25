@@ -1,4 +1,6 @@
 
+![alt text](https://wickedgroup.ca/wiki-images/wickedbarn.png "Wicked Barn")
+
 # MadMax's `Homelab`
 
 ![alt text](https://wickedgroup.ca/wiki-images/MadMax-Github_Banner.png "MadMax's Banner")
